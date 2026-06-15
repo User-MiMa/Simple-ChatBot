@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +13,8 @@
   "license": "ISC",
   "packageManager": "pnpm@10.34.3",
   "dependencies": {
+    "@openrouter/sdk": "^0.12.79",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1"
   }
 }
