@@ -8,15 +8,27 @@
 </head>
 <body>
     <div class="chatContainer">
-        <h1>Ask-A-Bot</h1>
-        <textarea 
+        <h1 id="title">Ask-A-Bot</h1>
+
+        <div class="answer"></div>
+        
+        <div class="btn-and-chat">
+            <textarea 
         id="promptSpace" 
         placeholder="I am Ask-A-Bot: Ask me anything like 'Why the sky is blue? My dog can talk? or whatever you want!"
         ></textarea>
+
         <button
+        id="button"
         type="submit">
         Answer me!
         </button>
+        </div>
+
+        
     </div>
+
+    <script src="script.js" type="module"></script>
+
 </body>
 </html>

@@ -1,20 +1,45 @@
 .chatContainer{
-    display: flex;
-    flex-direction: column;
+
     align-items: center;
     justify-content: center;
 
     height: 100vw;
+
+    border: solid;
+
+}
+
+.answer{
+    width: 0;
+    height: 0;
+    transition: 
+    height .5s ease,
+    width 1s ease .5s;
+}
+
+.btn-and-chat{
+    align-items: center;
+    justify-content: space-between;
+    transition: 5s ease;
+}
+
+.chatContainer,
+.btn-and-chat{
+    display: flex;
+    flex-direction: column;
 }
 
 #promptSpace{
     resize: none;
-
-    margin: 5em;
 
     height: 20vw;
     width: 50vw;
 
     text-align:justify;
     font-size: 1.5rem;
+    
+}
+
+#button{
+    width: 50.8vw;
 }
