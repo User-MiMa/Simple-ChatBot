@@ -10,26 +10,33 @@
 }
 
 .answer{
+
     width: 0;
     height: 0;
     transition: 
     height .5s ease,
     width 1s ease .5s;
+
 }
 
 .btn-and-chat{
+
     align-items: center;
     justify-content: space-between;
     transition: 5s ease;
+
 }
 
 .chatContainer,
 .btn-and-chat{
+
     display: flex;
     flex-direction: column;
+
 }
 
 #promptSpace{
+
     resize: none;
 
     height: 20vw;
@@ -41,5 +48,7 @@
 }
 
 #button{
+
     width: 50.8vw;
+    
 }
