@@ -1,9 +1,13 @@
 // Importar SDK de open route; uso de funciones avanzadas
 // Importar dotenv para usar variables de entorno de .env
 // Importar express para inicializar servidor
+// Importar marked para mark a HTML
+// Importar DOMPurify para sanitizar HTML
 import { OpenRouter } from '@openrouter/sdk';
 import 'dotenv/config';
 import express from 'express';
+import { marked } from "marked";
+import DOMPurify from 'isomorphic-dompurify';
 
 //Instanciar servidor
 // Middleware para convertir body de peticiones entrantes de JSON a JS Object
@@ -48,10 +52,14 @@ app.post('/chat', async function(req,res){
         }
     });
 
-    // Convertir en json la respuesta obtenida del modelo para devolver al front
-    res.json({reply: response.choices[0].message.content});
+    // Convertir respuesta a HTML y sanitizar
+    const html = marked.parse(response.choices[0].message.content);
+    const clean = DOMPurify.sanitize(html);
+
+    // Devolver al front
+    res.json({reply: clean});
 
 });
 
-//Inicar servidor en puerto 3000
-app.listen(3000);
+//Inicar servidor en puerto 3001
+app.listen(3001);

@@ -1,5 +1,6 @@
 const btn = document.getElementById('button');
 const answerWindow = document.querySelector('.answer');
+const promptSpace = document.getElementById('promptSpace');
 
 btn.addEventListener('click', showAnswer);
 
@@ -7,8 +8,9 @@ async function showAnswer() {
 
     const prompt = document.getElementById('promptSpace').value;
 
-    answerWindow.style.width='50vw';
-    answerWindow.style.height='50vw';
+    promptSpace.value = "";
+
+    answerWindow.classList.add('active');
     answerWindow.style.border='3px solid';
 
     // Hacer POST a API con prompt de usuario del UI y recibir respuesta
@@ -23,7 +25,7 @@ async function showAnswer() {
     // Leer y parsear a JSON
     const data = await res.json();
 
-    // Mostrar respuesta del modelo en UI
-    answerWindow.textContent = data.reply;
+    // Mostrar respuesta del modelo en UI con HTML
+    answerWindow.innerHTML = data.reply;
 
 }

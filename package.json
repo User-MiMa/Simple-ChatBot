@@ -15,6 +15,8 @@
   "dependencies": {
     "@openrouter/sdk": "^0.12.79",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "isomorphic-dompurify": "^3.17.0",
+    "marked": "^18.0.5"
   }
 }

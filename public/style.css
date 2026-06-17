@@ -1,54 +1,77 @@
-.chatContainer{
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.chatContainer {
     align-items: center;
     justify-content: center;
-
-    height: 100vw;
-
-    border: solid;
-
+    height: 100dvh;
+    border: none;
 }
 
-.answer{
-
-    width: 0;
+.answer {
+    width: 90vw;
+    max-width: 0;
     height: 0;
-    transition: 
-    height .5s ease,
-    width 1s ease .5s;
-
+    transition: height .5s ease, max-width 1s ease .5s;
 }
 
-.btn-and-chat{
+.answer.active {
+    max-width: 90vw;
+     height: 95%;   
+}
 
+.btn-and-chat {
     align-items: center;
     justify-content: space-between;
-    transition: 5s ease;
-
 }
 
 .chatContainer,
-.btn-and-chat{
-
+.btn-and-chat {
     display: flex;
     flex-direction: column;
-
 }
 
-#promptSpace{
-
+#promptSpace {
     resize: none;
-
-    height: 20vw;
-    width: 50vw;
-
-    text-align:justify;
-    font-size: 1.5rem;
-    
+    width: 90vw;
+    height: 25vw;
+    text-align: justify;
+    font-size: 1rem;
 }
 
-#button{
+#button {
+    width: 90vw;
+}
 
-    width: 50.8vw;
-    
+@media (min-width: 768px) {
+    .answer {
+        width: 50vw;
+    }
+
+    .answer.active {
+        max-width: 50vw;
+    }
+
+    #promptSpace {
+        width: 50vw;
+        height: 20vw;
+        font-size: 1.5rem;
+    }
+
+    #button {
+        width: 50.8vw;
+    }
 }
