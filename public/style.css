@@ -33,19 +33,26 @@ body {
     justify-content: center;
     height: 100dvh;
     border: none;
+    overflow: hidden;
+}
+
+.chatContainer.has-answer {
+    justify-content: flex-start;
 }
 
 .answer {
+    flex: 0;
+    min-height: 0;
+    overflow-y: auto;
     width: 90vw;
     max-width: 0;
-    height: 0;
-    transition: height .5s ease, max-width 1s ease .5s;
+    transition: max-width 1s ease .5s;
     border-radius: .5em;
 }
 
 .answer.active {
+    flex: 1;
     max-width: 90vw;
-    height: 95%;   
     background-color: #C9C9C1;
     font-family: "Manrope",Arial, Helvetica, sans-serif;
     padding: 0 .5em;
@@ -83,12 +90,100 @@ body {
 #button {
     width: 90vw;
     padding: 1em 0;
-    background-color: #C9C9C1;
+    background: linear-gradient(90deg, #C9C9C1 50%, #60ED00 50%);
+    background-size: 200% 100%;
+    background-position: 0% 0%;
     color: #182126;
     border: none;
     border-radius: .5em;
     font-size: 1rem;
     font-weight: 700;
+    cursor: pointer;
+    transition: background-position .4s ease, font-size .2s ease;
+}
+
+#button:hover,
+#button:focus-visible {
+    background-position: 100% 0%;
+    font-size: 1.1rem;
+}
+
+#promptSpace:focus,
+#button:focus-visible {
+    outline: none;
+}
+
+#mensaje{
+    font-family: "Pixelify Sans",Arial, Helvetica, sans-serif;
+    color: #60ED00;
+    background-color: #182126;
+    border-radius: .25em;
+    padding: .25em;
+    overflow-wrap: break-word;
+}
+
+.answer h2 {
+    color: #182126;
+    font-size: 1.4rem;
+    margin: 0.5em 0;
+}
+
+.answer ul {
+    margin: 0.5em 0;
+    padding-left: 1.5em;
+}
+
+.answer ol {
+    margin: 0.5em 0;
+    padding-left: 1.5em;
+}
+
+.answer li {
+    margin: 0.25em 0;
+    color: #182126;
+}
+
+.answer li::marker {
+    color: #182126;
+}
+
+.answer strong {
+    color: #182126;
+}
+
+.answer a {
+    color: #182126;
+    text-decoration: underline;
+}
+
+.answer a:hover {
+    color: #182126;
+}
+
+.answer code {
+    background: #2A3338;
+    color: #182126;
+    padding: 0.1em 0.4em;
+    border-radius: 0.3em;
+    font-family: "Consolas", monospace;
+}
+
+.answer pre {
+    background: #2A3338;
+    padding: 1em;
+    border-radius: 0.5em;
+    overflow-x: auto;
+    border: 1px solid #182126;
+}
+
+.answer pre code {
+    background: none;
+    padding: 0;
+}
+
+.answer p {
+    color: #182126;
+    margin: 0.5em 0;
 }
 
 .sr-only {

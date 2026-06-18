@@ -23,41 +23,57 @@ const client = new OpenRouter({
 });
 
 // Reglas para modelo
-const systemPrompt = `You are an efficient and smart assistant. Your goal is
-                        to provide answers that are as short as possible and
-                        simple to understand to any person. 
-                        If the user prompt lacks enough context to achieve the main goal,
-                        ask questions to provide a more accurate answer`;
+const systemPrompt = `You are an efficient and smart assistant. 
+                      You respond using Markdown formatting. 
+                      Structure your answers with clear sections 
+                      using ## headings, use bullet lists (-) and numbered
+                      lists (1.) when listing items, use **bold** for emphasis,
+                      and include \`code\` blocks when showing code. 
+                      Keep answers concise but well-structured so they render
+                      beautifully as HTML.`;
 
 
 // Envolver mensaje/prompt para API openRoute
 const userMessages = [
     {
         role:"system",
-        content: systemPrompt
+        content: systemPrompt,
+        stream: true,
     },
 ];
 
 // Crear endpoint HTTP POST para
 app.post('/chat', async function(req,res){
 
-    //Agregar prompt de usuario a arreglo
-    userMessages.push({role: 'user', content: `${req.body.prompt}`})
+    try {
 
-    //Llamar API con mensaje/prompt y modelo deseado
-    const response = await client.chat.send({
-        chatRequest: {
-            model: process.env.AI_MODEL,
-            messages: userMessages
-        }
-    });
+        //Agregar prompt de usuario a arreglo
+        userMessages.push({role: 'user', content: `${req.body.prompt}`})
 
-    // Convertir respuesta a HTML y sanitizar
-    const html = marked.parse(response.choices[0].message.content);
-    const clean = DOMPurify.sanitize(html);
+        //Llamar API con mensaje/prompt y modelo deseado
+        const response = await client.chat.send({
+            chatRequest: {
+                model: process.env.AI_MODEL,
+                messages: userMessages,
+            }
+        });
 
-    // Devolver al front
-    res.json({reply: clean});
+         // Convertir respuesta a HTML y sanitizar
+        const html = marked.parse(response.choices[0].message.content);
+        const clean = DOMPurify.sanitize(html);
+
+        // Devolver al front
+        res.json({reply: clean});
+
+    } catch (err) {
+
+        console.error('Error en /chat:', err);
+        res.status(500).end('Error procesando la solicitud');
+
+    }
+
+   
+
 
 });
 
