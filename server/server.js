@@ -59,6 +59,7 @@ app.post('/chat', async function(req,res){
         });
 
 
+        // Buffer para markdown parcial, parsear y sanitizar HTML en cada chunk
         let fullContent = "";
 
         for await (const chunk of response) {

@@ -2,6 +2,7 @@ const btn = document.getElementById('button');
 const answerWindow = document.querySelector('.answer');
 const promptSpace = document.getElementById('promptSpace');
 
+// Almacenar historial de conversación
 let conversationHTML = "";
 
 btn.addEventListener('click', showAnswer);
@@ -15,7 +16,8 @@ async function showAnswer() {
     answerWindow.classList.add('active');
     answerWindow.style.border='3px solid #C9C9C1';
 
-    answerWindow.innerHTML += `<p id='mensaje'>${promptSpace.value}</p>`;
+    // Renderizar historial + mensaje del usuario
+    answerWindow.innerHTML = conversationHTML + `<p id='mensaje'>${prompt}</p>`;
     promptSpace.value = "";
     answerWindow.scrollTop = answerWindow.scrollHeight;
 
@@ -28,6 +30,7 @@ async function showAnswer() {
         }
     );
 
+    // Recibir stream y renderizar HTML en tiempo real
     for await (const chunk of res.body) {
         const text = new TextDecoder().decode(chunk);
     
@@ -35,5 +38,6 @@ async function showAnswer() {
         answerWindow.scrollTop = answerWindow.scrollHeight;
     }
 
+    // Guardar todo el HTML actual como historial para siguiente pregunta
     conversationHTML = answerWindow.innerHTML;
 }
