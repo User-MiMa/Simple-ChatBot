@@ -4,31 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Happy+Monkey&family=Orbitron:wght@800&family=Pixelify+Sans:wght@400..700&family=Playwrite+GB+J:ital,wght@0,100..400;1,100..400&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Happy+Monkey&family=Manrope:wght@200..800&family=Orbitron:wght@800&family=Pixelify+Sans:wght@400..700&family=Playwrite+GB+J:ital,wght@0,100..400;1,100..400&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Ask-A-Bot</title>
 </head>
 <body>
-    <div class="chatContainer">
+    <main class="chatContainer">
         <h1 id="title">Ask-A-Bot</h1>
 
-        <div class="answer"></div>
+        <output class="answer" aria-live="polite" aria-label="Respuesta del bot"></output>
         
         <div class="btn-and-chat">
+            <label for="promptSpace" class="sr-only">Write your question</label>
             <textarea 
-        id="promptSpace" 
-        placeholder="I am Ask-A-Bot: Ask me anything like 'Why the sky is blue? My dog can talk? or whatever you want!"
-        ></textarea>
+                id="promptSpace"
+                name="prompt" 
+                placeholder="I am Ask-A-Bot: Ask me anything like 'Why the sky is blue? My dog can talk? or whatever you want!"
+            ></textarea>
 
-        <button
-        id="button"
-        type="submit">
-        Answer me!
-        </button>
+            <button id="button" type="button">
+                Answer me!
+            </button>
         </div>
-
-        
-    </div>
+    </main>
 
     <script src="script.js" type="module"></script>
-
 </body>
 </html>

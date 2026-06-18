@@ -10,8 +10,9 @@ async function showAnswer() {
 
     promptSpace.value = "";
 
+    document.getElementById('title').classList.add('active');
     answerWindow.classList.add('active');
-    answerWindow.style.border='3px solid';
+    answerWindow.style.border='3px solid #C9C9C1';
 
     // Hacer POST a API con prompt de usuario del UI y recibir respuesta
     const res = await fetch('/chat', 

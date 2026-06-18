@@ -12,6 +12,20 @@ html, body {
 body {
     display: flex;
     justify-content: center;
+    background-color: #182126;
+}
+
+#title{
+    color: #C9C9C1;
+    font-size: 3rem;
+    font-family: "Pixelify Sans",Arial, Helvetica, sans-serif;
+    margin-bottom: 0.25em;
+    transition: color 1.5s ease, text-shadow 1s ease .5s;
+}
+
+#title.active {
+    color: #60ED00;
+    text-shadow: 0 0 15px #60ED00, 0 0 20px #60ED00, 0 0 60px #60ED00;
 }
 
 .chatContainer {
@@ -26,16 +40,27 @@ body {
     max-width: 0;
     height: 0;
     transition: height .5s ease, max-width 1s ease .5s;
+    border-radius: .5em;
 }
 
 .answer.active {
     max-width: 90vw;
-     height: 95%;   
+    height: 95%;   
+    background-color: #C9C9C1;
+    font-family: "Manrope",Arial, Helvetica, sans-serif;
+    padding: 0 .5em;
+    color: #182126;
+    font-size: 1.5rem;
 }
 
 .btn-and-chat {
     align-items: center;
     justify-content: space-between;
+}
+
+#promptSpace,
+#button{
+    font-family: "Manrope",Arial, Helvetica, sans-serif;
 }
 
 .chatContainer,
@@ -50,10 +75,31 @@ body {
     height: 25vw;
     text-align: justify;
     font-size: 1rem;
+    margin: .5em 0;
+    border-radius: .5em;
+    background-color: #FFFFF5;
 }
 
 #button {
     width: 90vw;
+    padding: 1em 0;
+    background-color: #C9C9C1;
+    color: #182126;
+    border: none;
+    border-radius: .5em;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
 }
 
 @media (min-width: 768px) {
