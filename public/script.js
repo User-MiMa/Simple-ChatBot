@@ -2,6 +2,8 @@ const btn = document.getElementById('button');
 const answerWindow = document.querySelector('.answer');
 const promptSpace = document.getElementById('promptSpace');
 
+let conversationHTML = "";
+
 btn.addEventListener('click', showAnswer);
 
 async function showAnswer() {
@@ -24,14 +26,14 @@ async function showAnswer() {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({prompt})
         }
-    )
+    );
+
+    for await (const chunk of res.body) {
+        const text = new TextDecoder().decode(chunk);
     
+        answerWindow.innerHTML = conversationHTML + `<p id='mensaje'>${prompt}</p>` + text;
+        answerWindow.scrollTop = answerWindow.scrollHeight;
+    }
 
-    // Leer y parsear a JSON
-    const data = await res.json();
-
-    // Mostrar respuesta del modelo en UI con HTML
-    answerWindow.innerHTML += data.reply;
-    answerWindow.scrollTop = answerWindow.scrollHeight;
-
+    conversationHTML = answerWindow.innerHTML;
 }

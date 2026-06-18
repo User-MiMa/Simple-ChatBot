@@ -38,7 +38,6 @@ const userMessages = [
     {
         role:"system",
         content: systemPrompt,
-        stream: true,
     },
 ];
 
@@ -48,27 +47,35 @@ app.post('/chat', async function(req,res){
     try {
 
         //Agregar prompt de usuario a arreglo
-        userMessages.push({role: 'user', content: `${req.body.prompt}`})
+        userMessages.push({role: 'user', content: `${req.body.prompt}`});
 
         //Llamar API con mensaje/prompt y modelo deseado
         const response = await client.chat.send({
             chatRequest: {
                 model: process.env.AI_MODEL,
                 messages: userMessages,
+                stream:true,
             }
         });
 
-         // Convertir respuesta a HTML y sanitizar
-        const html = marked.parse(response.choices[0].message.content);
-        const clean = DOMPurify.sanitize(html);
 
-        // Devolver al front
-        res.json({reply: clean});
+        let fullContent = "";
+
+        for await (const chunk of response) {
+            const content = chunk.choices?.[0]?.delta?.content;
+            if (content) {
+                fullContent += content;
+                const html = marked.parse(fullContent);
+                const clean = DOMPurify.sanitize(html);
+                res.write(clean);
+            }
+        }
+
+        res.end();
 
     } catch (err) {
 
         console.error('Error en /chat:', err);
-        res.status(500).end('Error procesando la solicitud');
 
     }
 
