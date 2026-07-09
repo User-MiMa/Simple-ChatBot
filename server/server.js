@@ -32,8 +32,7 @@ const systemPrompt = `You are an efficient and smart assistant.
                       Keep answers concise but well-structured so they render
                       beautifully as HTML.`;
 
-
-// Envolver mensaje/prompt para API openRoute
+// Historial completo de la conversación (persiste mientras el server corra)
 const userMessages = [
     {
         role:"system",
@@ -41,12 +40,12 @@ const userMessages = [
     },
 ];
 
-// Crear endpoint HTTP POST para
+// Crear endpoint POST para enviar mensajes modelo
 app.post('/chat', async function(req,res){
 
     try {
 
-        //Agregar prompt de usuario a arreglo
+        //Agregar prompt de usuario al historial
         userMessages.push({role: 'user', content: `${req.body.prompt}`});
 
         //Llamar API con mensaje/prompt y modelo deseado
@@ -74,9 +73,15 @@ app.post('/chat', async function(req,res){
 
         res.end();
 
+        // Guardar respuesta del assistant para mantener contexto en siguientes mensajes
+        userMessages.push({role: 'assistant', content: fullContent});
+
     } catch (err) {
 
         console.error('Error en /chat:', err);
+        // Eliminar el mensaje de usuario que causó el error para mantener coherencia
+        userMessages.pop();
+        res.status(500).json({ error: 'Error al procesar la solicitud' });
 
     }
 
@@ -85,5 +90,9 @@ app.post('/chat', async function(req,res){
 
 });
 
-//Inicar servidor en puerto 3001
-app.listen(3001);
+// Iniciar servidor en puerto definido por variable de entorno o 3001 por defecto
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
