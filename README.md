@@ -75,17 +75,17 @@ docker build -t chatbot .
 docker run -p 3001:3001 --env-file .env chatbot
 ```
 
----
-
 ### Qué hace / What this does
 
 **Español:**  
 * Construye una imagen ligera de Docker  
-* Corre con tus credenciales de API (desde `.env`)  
+* Corre con tus credenciales de API (desde `.env`)
+* Expone app en http://localhost:3001  
 
 **English:**  
 * Builds a lightweight Docker image  
-* Runs with your API credentials (from `.env`)  
+* Runs with your API credentials (from `.env`)
+* Exposes app in http://localhost:3001  
 
 ---
 
