@@ -1,4 +1,4 @@
-# chatBOT
+# Ask-A-Bot
 
 **Español:** Un servicio conversacional de IA usando OpenRouter con respuestas en tiempo real con Markdown a HTML. Este proyecto muestra el uso simple de SDKs de IA junto con HTML, CSS y Docker.
 
